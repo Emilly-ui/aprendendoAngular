@@ -1,10 +1,9 @@
-import { Component, signal, computed,effect } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 import { Produto } from '../produto/produto';
-import { NgClass } from "../../../../../node_modules/@angular/common/types/_common_module-chunk";
 
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto ],
+  imports: [Produto],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
@@ -13,14 +12,14 @@ export class ListaProdutos {
     effect(() => {
       console.log('Lista de produtos alterada:', this.produtos());
     });
-  effect(() => {
-console.log('Valor total atualizado:', this.valorTotal());
-});
-effect(() => {
-  if (typeof document !== 'undefined') {
-    document.title = `(${this.totalProdutos()}) Minha Loja`;
-  }
-});
+    effect(() => {
+      console.log('Valor total atualizado:', this.valorTotal());
+    });
+    effect(() => {
+      if (typeof document !== 'undefined') {
+        document.title = `(${this.totalProdutos()}) Minha Loja`;
+      }
+    });
   }
 
   produtoSelecionado = signal<string | null>(null);
@@ -28,16 +27,15 @@ effect(() => {
   produtos = signal([
     { nome: 'Notebook', preco: 3800 },
     { nome: 'Mouse', preco: 179 },
-  ]); 
+  ]);
 
   totalProdutos = computed(() => this.produtos().length);
 
   valorTotal = computed(() => {
-    return this.produtos().reduce((total, item) => total + 
-    item.preco, 0);
+    return this.produtos().reduce((total, item) => total + item.preco, 0);
   });
 
-  carrinho  = signal<{ nome: string; preco: number }[]>([]);
+  carrinho = signal<{ nome: string; preco: number }[]>([]);
 
   quantidadeCarrinho = computed(() => this.carrinho().length);
 
@@ -50,16 +48,14 @@ effect(() => {
   }
 
   adicionarProduto() {
-this.produtos.update(listaAtual =>
-    [...listaAtual,{ nome: 'Teclado', preco: 250 }]);
+    this.produtos.update((listaAtual) => [...listaAtual, { nome: 'Teclado', preco: 250 }]);
   }
 
   substituirProdutos() {
-    this.produtos.set([{nome: 'Produtonovo', preco: 999}]);
+    this.produtos.set([{ nome: 'Produtonovo', preco: 999 }]);
   }
 
-  adicionarAoCarrinho(produto: { nome: string; preco: number}) {
-  this.carrinho.update((listaAtual) => [...listaAtual, produto]);
- }
-
+  adicionarAoCarrinho(produto: { nome: string; preco: number }) {
+    this.carrinho.update((listaAtual) => [...listaAtual, produto]);
+  }
 }

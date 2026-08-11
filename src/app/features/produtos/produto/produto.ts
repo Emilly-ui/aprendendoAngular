@@ -3,7 +3,7 @@ import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-produto',
-  imports: [ CurrencyPipe ],
+  imports: [CurrencyPipe],
   templateUrl: './produto.html',
   styleUrl: './produto.css',
 })

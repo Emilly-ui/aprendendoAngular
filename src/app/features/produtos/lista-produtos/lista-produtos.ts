@@ -1,15 +1,18 @@
 import { Component, signal, computed, effect, inject } from '@angular/core';
 import { Produto } from '../produto/produto';
 import {ProdutosService } from '../produtos.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto],
+  imports: [Produto, MatButtonModule],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
   private produtosService = inject(ProdutosService);
+
+  erro = signal<string | null>(null);
 
   constructor() {
     // carregada API
@@ -29,7 +32,8 @@ export class ListaProdutos {
   }
 
   carregarProdutos() {
-    this.carregando.set(true);
+    this.erro.set(null); // limpa erro anterior 
+    this.carregando.set(true); // ativa loading 
     this.produtosService.buscarProdutos().subscribe({
       next: (dados) => {
         const produtos = this.produtosService.transformarProdutos
@@ -39,10 +43,11 @@ export class ListaProdutos {
       },
       error: (erro) => {
         console.error('Erro ao carregar produtos:', erro);
+        this.erro.set('Erro ao carregar produtos. Verifique sua conexão e tente novamente,');
         this.carregando.set(false);
       },
     });
-  } 
+  }
 
   produtoSelecionado = signal<string | null>(null);
 

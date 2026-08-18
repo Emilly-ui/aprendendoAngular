@@ -1,38 +1,18 @@
-<div class="produto-card">
-  <h3>{{ nome }}</h3>
-  <p>{{ preco | currency: 'BRL' }}</p>
-
-<p>
-   <button mat-raised-button color="primary" (click)="selecionarProduto()">
-     Selecionar
-   </button>
-</p>
-
-<p>
-   <button mat-stroked-button color="accent" (click)="adicionarAoCarrinho()">
-    Adicionar ao Carrinho
-   </button>
-</p>
-
-
 <mat-card class="produto">
-<mat-card-header>
-<mat-card-title>{{ nome }}</mat-card-title>
-</mat-card-header>
+  <mat-card-header>
+    <mat-card-title>{{ nome }}</mat-card-title>
+  </mat-card-header>
 
-<mat-card-content>
-<p>{{ preco | currency: 'BRL' }}</p>
-</mat-card-content>
+  <mat-card-content>
+    <p>{{ preco | currency: 'BRL' }}</p>
+  </mat-card-content>
 
-<mat-card-actions>
-<button mat-raised-button color="primary" (click)="selecionarProduto()">
-Selecionar
-</button>
-
-<button mat-stroked-button color="accent" (click)="adicionarAoCarrinho()">
-Adicionar ao Carrinho
-</button>
-</mat-card-actions>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" 
+    (click)="selecionarProduto()">Selecionar</button>
+    <button mat-stroked-button color="accent" 
+    (click)="adicionarAoCarrinho()">
+      AdicionaraoCarrinho
+    </button>
+  </mat-card-actions>
 </mat-card>
-
-</div>
